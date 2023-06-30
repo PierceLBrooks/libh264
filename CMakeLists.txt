@@ -44,11 +44,12 @@ target_compile_options(${PROJECT_NAME} PRIVATE "-std=gnu99")
 
 
 find_package(json-c CONFIG REQUIRED)
+find_package(ulog CONFIG REQUIRED)
 if(WIN32)
     target_link_libraries(${PROJECT_NAME} 
                       PRIVATE
                       json-c::json-c 
-                      ulog 
+                      ulog::ulog 
                       ws2_32)
 
     install(CODE "file(GLOB dll_files \"${CMAKE_CURRENT_BINARY_DIR}/*.dll\")")
@@ -58,7 +59,7 @@ else()
   target_link_libraries(${PROJECT_NAME} 
                       PRIVATE
                       json-c::json-c
-                      ulog)
+                      ulog::ulog)
 
     install(CODE [[
         file(GET_RUNTIME_DEPENDENCIES
